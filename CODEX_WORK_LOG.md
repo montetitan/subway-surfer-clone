@@ -72,6 +72,30 @@ This file documents work completed by Codex (the AI coding agent) in this reposi
     - Raised HUD z-index in overlay mode so settings buttons are clickable above overlay.
 28. Fixed portrait overlap issue:
     - Settings panel now repositions below HUD in portrait mode and resizes to available viewport space.
+29. Added visual-style setting and persistence:
+    - New Style settings icon/button and selector.
+    - Modes: `default`, `realistic`, `cartoony`, `neon`.
+    - Applied via local storage and restored on load.
+30. Expanded rendering pipeline with style-specific effects:
+    - Enhanced animated background, road shimmer, obstacle highlights, and richer sprite details.
+    - Synced `game.js` changes into `android-apk/assets/game.js` after updates.
+31. Performed rendering performance optimization:
+    - Removed expensive full-frame canvas `ctx.filter` pass.
+    - Added adaptive effects quality scaling by viewport size/style.
+    - Gated decorative passes for stable fullscreen/mobile performance.
+32. Reworked player animation system repeatedly based on feedback:
+    - Opposite-phase arm/leg coordination and jointed limb paths.
+    - Fixed limb path bug where one leg appeared missing.
+    - Tightened motion to a compact jog (reduced sway/bounce/squash).
+    - Corrected gait direction to read as forward/up-lane running rather than horizontal dancing.
+33. Updated player shape rendering:
+    - Increased torso and hip/pelvis mass slightly.
+    - Replaced boxy torso with rounded human silhouette (chest/waist/shoulders/neck/hips).
+34. Increased player animation cadence multiple times (without changing gameplay speed) per request.
+35. Implemented style-specific object art direction:
+    - `Realistic`: pseudo-3D depth shading on road, skyline, obstacles, and coins.
+    - `Cartoony`: flatter 2D rendering with stronger outlines.
+    - `Neon Arcade`: stronger flashing lights on road and in background/skyline.
 
 ## Why the fixes were made
 - Prevent runtime failure: malformed JSON score fields could raise `ValueError` and fail requests.
@@ -84,6 +108,9 @@ This file documents work completed by Codex (the AI coding agent) in this reposi
 - Improve mobile usability: fullscreen rendering and portrait-safe settings layout reduce clipping/overlap issues.
 - Keep gameplay focused: settings hidden during live runs to prevent accidental taps.
 - Improve visual variety: background themes add replay value while preserving game mechanics.
+- Add user-visible style differentiation: each mode now has distinct rendering language, not just minor color shifts.
+- Preserve responsiveness while increasing visual richness: adaptive FX quality and removal of heavy filter path keep rendering smooth.
+- Improve character readability and polish: jogging cadence, forward-running gait, and human silhouette better match player expectations.
 
 ## Notes
 - Because the repository has no commits, there is no verifiable historical record of prior work by Codex in git at this time.

@@ -69,6 +69,30 @@ body.render-fullscreen #game {
   padding: 8px 12px;
   cursor: pointer;
 }
+#styleBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+#styleBtn::before {
+  content: "";
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  background: linear-gradient(135deg, #6c757d, #dee2e6);
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.15);
+}
+body[data-visual-style="realistic"] #styleBtn::before {
+  background: linear-gradient(135deg, #2f3e46, #cad2c5);
+}
+body[data-visual-style="cartoony"] #styleBtn::before {
+  background: linear-gradient(135deg, #ffbe0b, #fb5607);
+}
+body[data-visual-style="neon"] #styleBtn::before {
+  background: linear-gradient(135deg, #00f5ff, #ff00aa);
+  box-shadow: 0 0 10px rgba(0, 245, 255, 0.55);
+}
 
 #syncStatus.ok { color: var(--ok); font-weight: 700; }
 #syncStatus.warn { color: var(--danger); font-weight: 700; }

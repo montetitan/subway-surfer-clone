@@ -13,6 +13,7 @@ A lightweight browser game inspired by Subway Surfers, with an Android APK wrapp
   - Render mode: `Fixed (960x540)`, `Fullscreen`
   - Runner selection: `Jogger`, `Business Man`, `Joker`, `Mechanic`
   - Background theme: `Normal Road`, `Beach Side Road`, `Airport Road`, `Waterway Road`
+  - Visual style: `Default`, `Realistic`, `Cartoony`, `Neon Arcade`
 - Settings controls are visible only during game-over state (hidden during active gameplay)
 - Post-game cinematics:
   - Gold celebratory effect for new best score
@@ -47,8 +48,19 @@ python3.14 server.py
 - Orientation setting bridge: let Android users choose orientation in-app instead of hard-locked orientation.
 - Fullscreen render mode: remove fixed-size canvas cropping when desired (especially useful on mobile screens).
 - Theme selector: allow visual variety without changing gameplay rules.
+- Visual-style selector:
+  - `Realistic`: pseudo-3D shading/depth on road, obstacles, skyline, and coins
+  - `Cartoony`: flat 2D fills with outlined shapes
+  - `Neon Arcade`: heavier flashing road/background lighting and neon accents
 - Game-over-only settings visibility: avoid input clutter during active runs.
 - Portrait settings placement: prevent overlap with HUD/score cards on phones.
+- Render performance tuning:
+  - removed expensive full-canvas filter pass
+  - adaptive decorative effect density based on viewport size/style
+- Player animation upgrades:
+  - tighter jogging cadence and posture
+  - more human silhouette (rounded torso/shoulders/neck/hips)
+  - style-aware gait behavior while preserving gameplay hitboxes
 
 ## Testing
 ### Backend/API
@@ -65,10 +77,13 @@ Smoke tests cover:
 ### Frontend Script Syntax
 ```bash
 node --check game.js
+node --check android-apk/assets/game.js
 ```
+```bash
 cp game.js ./android-apk/assets
 cp index.html ./android-apk/assets
 cp styles.css ./android-apk/assets
+```
 
 ## Android APK
 ### Build
@@ -95,8 +110,13 @@ $HOME/Library/Android/sdk/platform-tools/adb install -r ./android-apk/build/subw
 - Verify render mode toggle (`Fixed` vs `Fullscreen`) and no cropping in fullscreen mode.
 - Verify runner selection persists after app restart.
 - Verify background theme selection persists after app restart.
+- Verify style selection (`Default`/`Realistic`/`Cartoony`/`Neon Arcade`) persists after app restart.
 - Verify settings controls are hidden while running and available at game over.
 - In portrait mode, verify settings panel appears below HUD without overlap.
 - Validate collision fairness across lanes and obstacle types.
 - Confirm cinematic overlay differences for new-record vs non-record game over.
+- Validate style rendering differences:
+  - realistic objects show depth shading,
+  - cartoony objects use flat outlined rendering,
+  - neon mode shows stronger flashing road/background lights.
 - Validate APK install/update cycle with `adb install -r`.
