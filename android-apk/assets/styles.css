@@ -1,0 +1,176 @@
+:root {
+  --bg-1: #0d1b2a;
+  --bg-2: #1b263b;
+  --accent: #ffd166;
+  --danger: #ef476f;
+  --ok: #06d6a0;
+  --text: #e0e1dd;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(1200px 600px at 50% -20%, #415a77 0%, transparent 60%),
+    linear-gradient(180deg, var(--bg-2), var(--bg-1));
+  overscroll-behavior: none;
+}
+body.render-fullscreen {
+  place-items: stretch;
+  overflow: hidden;
+}
+
+#game {
+  width: min(96vw, 960px);
+  height: auto;
+  border: 2px solid #415a77;
+  border-radius: 12px;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.4);
+  background: #0b1020;
+  touch-action: none;
+  user-select: none;
+}
+body.render-fullscreen #game {
+  width: 100vw;
+  height: 100vh;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.hud {
+  position: fixed;
+  top: 14px;
+  left: 14px;
+  display: flex;
+  gap: 12px;
+  z-index: 10;
+  flex-wrap: wrap;
+}
+.hud.overlay-mode {
+  z-index: 30;
+}
+.hud div {
+  background: rgba(11, 16, 32, 0.8);
+  border: 1px solid #415a77;
+  border-radius: 8px;
+  padding: 8px 12px;
+}
+.settingsBtn {
+  border: 1px solid #415a77;
+  border-radius: 8px;
+  background: rgba(11, 16, 32, 0.9);
+  color: var(--text);
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+#syncStatus.ok { color: var(--ok); font-weight: 700; }
+#syncStatus.warn { color: var(--danger); font-weight: 700; }
+
+.settingsPanel {
+  /* Panel supports multiple controls (orientation + runner) and wraps on narrow/mobile widths. */
+  position: fixed;
+  top: 72px;
+  right: 14px;
+  z-index: 25;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  background: rgba(11, 16, 32, 0.95);
+  border: 1px solid #415a77;
+  border-radius: 10px;
+  padding: 10px;
+  max-width: min(94vw, 520px);
+  overflow-y: auto;
+}
+.settingsPanel.portrait-mode {
+  top: auto;
+  max-width: none;
+  justify-content: flex-start;
+}
+.settingsPanel select,
+.settingsPanel button {
+  border: 1px solid #415a77;
+  border-radius: 8px;
+  padding: 6px 8px;
+  background: #0b1020;
+  color: var(--text);
+}
+.settingsPanel button {
+  cursor: pointer;
+}
+
+.help {
+  position: fixed;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+  font-size: 0.92rem;
+  background: rgba(11, 16, 32, 0.75);
+  border: 1px solid #415a77;
+  border-radius: 8px;
+  padding: 8px 12px;
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: rgba(0, 0, 0, 0.65);
+  z-index: 20;
+  text-align: center;
+}
+.overlay.cinematic-win {
+  /* Brighter celebratory treatment for runs that beat the best score. */
+  background: radial-gradient(circle at 50% 35%, rgba(255, 214, 102, 0.34), rgba(0, 0, 0, 0.72) 62%);
+  animation: winPulse 0.9s ease-out 2;
+}
+.overlay.cinematic-loss {
+  /* Darker impact treatment for non-record game overs. */
+  background: radial-gradient(circle at 50% 40%, rgba(130, 16, 22, 0.22), rgba(0, 0, 0, 0.82) 68%);
+  animation: lossShake 0.24s ease-in-out 4;
+}
+.overlay h1 { margin: 0 0 8px; }
+.overlay button {
+  margin-top: 8px;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 16px;
+  cursor: pointer;
+  background: var(--accent);
+  color: #101018;
+  font-weight: 700;
+}
+#newRecordBox {
+  margin-top: 8px;
+}
+#newRecordBox input {
+  border: 1px solid #415a77;
+  border-radius: 8px;
+  padding: 8px 10px;
+  margin-right: 8px;
+}
+@keyframes winPulse {
+  0% { transform: scale(1); filter: brightness(1); }
+  50% { transform: scale(1.02); filter: brightness(1.1); }
+  100% { transform: scale(1); filter: brightness(1); }
+}
+@keyframes lossShake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-8px); }
+  75% { transform: translateX(8px); }
+  100% { transform: translateX(0); }
+}
+.hidden { display: none; }

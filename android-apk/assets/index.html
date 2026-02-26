@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Subway Surfer Style Runner</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- HUD stays visible during gameplay; settings controls are intentionally in HUD for mobile reachability. -->
+    <div class="hud">
+      <div>Score: <span id="score">0</span></div>
+      <div>Coins: <span id="coins">0</span></div>
+      <div>High Score: <span id="highScore">0</span></div>
+      <div>Top Player: <span id="highScoreUser">-</span></div>
+      <div>Speed: <span id="speed">1.0x</span></div>
+      <div>Sync: <span id="syncStatus">Checking...</span></div>
+      <button id="settingsBtn" class="settingsBtn" type="button">Settings</button>
+      <button id="runnerBtn" class="settingsBtn" type="button">Runner</button>
+      <button id="screenBtn" class="settingsBtn" type="button">Screen</button>
+      <button id="bgBtn" class="settingsBtn" type="button">Background</button>
+    </div>
+
+    <!-- Shared settings panel used by both Settings and Runner buttons. -->
+    <div id="settingsPanel" class="settingsPanel hidden">
+      <label for="orientationSelect">Orientation</label>
+      <select id="orientationSelect">
+        <option value="auto">Auto</option>
+        <option value="landscape">Landscape</option>
+        <option value="portrait">Portrait</option>
+      </select>
+      <label for="runnerSelect">Runner</label>
+      <select id="runnerSelect">
+        <option value="jogger">Jogger</option>
+        <option value="businessman">Business Man</option>
+        <option value="joker">Joker</option>
+        <option value="mechanic">Mechanic</option>
+      </select>
+      <label for="renderModeSelect">Render</label>
+      <select id="renderModeSelect">
+        <option value="fixed">Fixed (960x540)</option>
+        <option value="fullscreen">Fullscreen</option>
+      </select>
+      <label for="bgSelect">Background</label>
+      <select id="bgSelect">
+        <option value="normal">Normal Road</option>
+        <option value="beach">Beach Side Road</option>
+        <option value="airport">Airport Road</option>
+        <option value="waterway">Waterway Road</option>
+      </select>
+      <button id="closeSettingsBtn" type="button">Close</button>
+    </div>
+
+    <canvas id="game" width="960" height="540" aria-label="runner game canvas"></canvas>
+
+    <!-- Overlay is reused for both normal loss and new-record cinematic game-over states. -->
+    <div id="overlay" class="overlay hidden">
+      <h1>Game Over</h1>
+      <p>Final score: <span id="finalScore">0</span></p>
+      <p>Coins: <span id="finalCoins">0</span></p>
+      <p>High score: <span id="finalHighScore">0</span></p>
+      <p>Top player: <span id="finalHighScoreUser">-</span></p>
+      <div id="newRecordBox" class="hidden">
+        <p>New High Score! Enter your name:</p>
+        <input id="nameInput" type="text" maxlength="24" placeholder="Your name" />
+        <button id="saveNameBtn">Save Name</button>
+      </div>
+      <button id="restartBtn">Restart</button>
+    </div>
+
+    <!-- Controls helper is hidden by default and shown once from game.js on first launch only. -->
+    <div class="help hidden">
+      <span>Controls: A/D or Left/Right to switch lanes</span>
+      <span>W/Space/Up to jump</span>
+      <span>S/Down to slide (duck obstacles)</span>
+      <span>Mobile: swipe left/right/up/down (tap to jump)</span>
+    </div>
+
+    <script src="game.js"></script>
+  </body>
+</html>
