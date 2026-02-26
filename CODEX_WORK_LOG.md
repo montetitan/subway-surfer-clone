@@ -1,14 +1,12 @@
 # Codex Work Log
 
-Last updated: 2026-02-26 12:10:17 IST
-
 ## Scope
 This file documents work completed by Codex (the AI coding agent) in this repository.
 
 ## Verified repository state at time of update
 - Branch: `main`
-- Git history: no commits exist yet on this branch.
-- Working tree: untracked project files present, no tracked changes.
+- Git history now initialized with release snapshots.
+- Tags present: `v1.0`, `v1.1`.
 
 ## Work completed by Codex in this session
 1. Reviewed repository status with `git status --short --branch`.
@@ -59,6 +57,21 @@ This file documents work completed by Codex (the AI coding agent) in this reposi
 21. Rebuilt/synced Android APK repeatedly after each gameplay/UI update to ensure packaged assets match latest source.
 22. Added and maintained LAN share flow for `android-apk/build` via Python HTTP server (for APK download on local network).
 23. Updated README again to comprehensively document implemented features and rationale.
+24. Added render mode settings and behavior:
+    - New Screen settings icon.
+    - `Fixed (960x540)` vs `Fullscreen` render modes.
+    - Dynamic canvas resize and lane recalculation for fullscreen.
+25. Added background settings and rendering variants:
+    - New Background settings icon.
+    - Themes: normal, beach, airport, waterway.
+    - Theme persisted in local storage and applied on load.
+26. Restricted settings visibility to game-over state:
+    - Settings buttons hidden during active run.
+    - Buttons/panel shown on game over.
+27. Fixed game-over settings clickability:
+    - Raised HUD z-index in overlay mode so settings buttons are clickable above overlay.
+28. Fixed portrait overlap issue:
+    - Settings panel now repositions below HUD in portrait mode and resizes to available viewport space.
 
 ## Why the fixes were made
 - Prevent runtime failure: malformed JSON score fields could raise `ValueError` and fail requests.
@@ -68,6 +81,9 @@ This file documents work completed by Codex (the AI coding agent) in this reposi
 - Support Android delivery: repository now includes reproducible APK build/install path.
 - Improve fairness/clarity: collision logic and road rendering were adjusted to match player expectation from perspective visuals.
 - Improve UX and accessibility: helper timing, configurable orientation, runner customization, and cinematic feedback improve usability and engagement.
+- Improve mobile usability: fullscreen rendering and portrait-safe settings layout reduce clipping/overlap issues.
+- Keep gameplay focused: settings hidden during live runs to prevent accidental taps.
+- Improve visual variety: background themes add replay value while preserving game mechanics.
 
 ## Notes
 - Because the repository has no commits, there is no verifiable historical record of prior work by Codex in git at this time.
