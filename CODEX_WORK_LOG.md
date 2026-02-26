@@ -72,14 +72,6 @@ This file documents work completed by Codex (the AI coding agent) in this reposi
     - Raised HUD z-index in overlay mode so settings buttons are clickable above overlay.
 28. Fixed portrait overlap issue:
     - Settings panel now repositions below HUD in portrait mode and resizes to available viewport space.
-29. Created repository snapshots:
-    - Commit/tag `v1.0`.
-    - Commit/tag `v1.1`.
-30. Updated repository-local git identity:
-    - Local `user.email` set to `montetitan@gmail.com` (global unchanged).
-31. Investigated remote push failures:
-    - Pull works but push failed with GitHub 403 (permission/token scope issue).
-    - Confirmed remote history mismatch scenario (`unrelated histories`) and documented force-push path when needed.
 
 ## Why the fixes were made
 - Prevent runtime failure: malformed JSON score fields could raise `ValueError` and fail requests.
